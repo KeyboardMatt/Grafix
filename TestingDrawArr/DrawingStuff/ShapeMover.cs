@@ -11,40 +11,26 @@ namespace TestingDrawArr.DrawingStuff
     public class ShapeMover
     {
 
-        List<Movements._Movements> lShapeMovement = new List<Movements._Movements>();
+       public static List<Movements._Movements> lShapeMovement = new List<Movements._Movements>();
 
 
         // ENTRY POINT TO A FULL SCREEN 'STEP'
-        public void StepAllShapes()
+        public static void StepAllShapes()
         {
             Array.Clear(PUBV.consoleArr_NeedsUpdate,0, PUBV.consoleArr_NeedsUpdate.Length);
 
-            List<int> UpdateIndex_Left = new List<int>();
-            List<int> UpdateIndex_Top = new List<int>();
-
-            FillUpdateIndexLists();
-
-            Thread.Sleep(20);
-
-
-            // Go through each shape in order of priority, and note necessary updates
-            void FillUpdateIndexLists()
+            ASCII_Shape nextShape;
+            for (int i = 0; i < PUBV.PriorityList_Shapes.Count; i++)
             {
-                UpdateIndex_Left.Clear();
-                UpdateIndex_Top.Clear();
+                nextShape = PUBV.PriorityList_Shapes[i];
 
-
-                ASCII_Shape nextShape;
-                for (int i = 0; i < PUBV.PriorityList_Shapes.Count; i++)
+                if (nextShape.Has_MovementOrders)
                 {
-                    nextShape = PUBV.PriorityList_Shapes[i];
-
-                    if (nextShape.Has_MovementOrders)
-                    {
-                        nextShape.TakeMovement_Step();
-                    }
+                    nextShape.TakeMovement_Step();
                 }
             }
+
+            Thread.Sleep(20);
         }
 
 
@@ -120,6 +106,7 @@ namespace TestingDrawArr.DrawingStuff
                             eraseBot = Top + (shapeHeight - 1) + UDInterval;
                             eraseLeft = Left;
                             eraseRight = Left + shapeWidth ;
+                            clearIt(eraseTop, eraseLeft, eraseBot, eraseRight);
                             break;
                         }
 
@@ -132,6 +119,7 @@ namespace TestingDrawArr.DrawingStuff
                             eraseBot = Top + UDInterval;
                             eraseLeft = newLeft;
                             eraseRight = newLeft + shapeWidth ;
+                            clearIt(eraseTop, eraseLeft, eraseBot, eraseRight);
                             break;
                         }
 
@@ -144,6 +132,7 @@ namespace TestingDrawArr.DrawingStuff
                             eraseBot = newTop + shapeHeight;
                             eraseLeft = newLeft + shapeWidth;
                             eraseRight = eraseLeft + LRInterval;
+                            clearIt(eraseTop, eraseLeft, eraseBot, eraseRight);
                             break;
                         }
 
@@ -156,6 +145,7 @@ namespace TestingDrawArr.DrawingStuff
                             eraseBot = newTop + shapeHeight;
                             eraseLeft = Left;
                             eraseRight = Left + LRInterval;
+                            clearIt(eraseTop, eraseLeft, eraseBot, eraseRight);
                             break;
                         }
 
@@ -170,34 +160,20 @@ namespace TestingDrawArr.DrawingStuff
                             //------------------
                             {
                                 eraseTop = Top;
-                                eraseBot = Top + (shapeHeight - 1);
+                                eraseBot = Top + shapeHeight;
                                 eraseLeft = Left + shapeWidth - LRInterval;
-                                eraseRight = Left + (shapeWidth - 1);
-
-                                eraseHeight = shapeHeight;
-                                eraseWidth = Math.Abs(eraseLeft - eraseRight) + 1;
-
-                                arrEraseInts[0, 0] = eraseLeft;
-                                arrEraseInts[0, 1] = eraseTop;
-                                arrEraseInts[0, 2] = eraseHeight;
-                                arrEraseInts[0, 3] = eraseWidth;
+                                eraseRight = Left + shapeWidth ;
+                                clearIt(eraseTop, eraseLeft, eraseBot, eraseRight);
                             }
                             //------------------
                             // Erase Wide Area
                             //------------------
                             {
-                                eraseTop = Top + (shapeHeight - 1);
-                                eraseBot = eraseTop - UDInterval;
+                                eraseTop = Top + shapeHeight - UDInterval;
+                                eraseBot = eraseTop + UDInterval;
                                 eraseLeft = Left;
-                                eraseRight = Left + (shapeWidth - 1);
-
-                                eraseHeight = shapeHeight;
-                                eraseWidth = Math.Abs(eraseLeft - eraseRight) + 1;
-
-                                arrEraseInts[1, 0] = eraseLeft;
-                                arrEraseInts[1, 1] = eraseTop;
-                                arrEraseInts[1, 2] = eraseHeight;
-                                arrEraseInts[1, 3] = eraseWidth;
+                                eraseRight = Left + shapeWidth;
+                                clearIt(eraseTop, eraseLeft, eraseBot, eraseRight);
                             }
                             break;
                         }
@@ -213,34 +189,20 @@ namespace TestingDrawArr.DrawingStuff
                             //------------------
                             {
                                 eraseTop = Top;
-                                eraseBot = Top + (shapeHeight - 1);
+                                eraseBot = Top + shapeHeight ;
                                 eraseLeft = Left + shapeWidth - LRInterval;
-                                eraseRight = Left + (shapeWidth - 1);
-
-                                eraseHeight = shapeHeight;
-                                eraseWidth = Math.Abs(eraseLeft - eraseRight) + 1;
-
-                                arrEraseInts[0, 0] = eraseLeft;
-                                arrEraseInts[0, 1] = eraseTop;
-                                arrEraseInts[0, 2] = eraseHeight;
-                                arrEraseInts[0, 3] = eraseWidth;
+                                eraseRight = Left + shapeWidth;
+                                clearIt(eraseTop, eraseLeft, eraseBot, eraseRight);
                             }
                             //------------------
                             // Erase Wide Area
                             //------------------
                             {
                                 eraseTop = Top;
-                                eraseBot = Top + (UDInterval - 1);
+                                eraseBot = Top + UDInterval ;
                                 eraseLeft = Left;
-                                eraseRight = eraseLeft + (shapeWidth - 1);
-
-                                eraseHeight = Math.Abs(eraseTop - eraseBot) + 1;
-                                eraseWidth = shapeWidth;
-
-                                arrEraseInts[1, 0] = eraseLeft;
-                                arrEraseInts[1, 1] = eraseTop;
-                                arrEraseInts[1, 2] = eraseHeight;
-                                arrEraseInts[1, 3] = eraseWidth;
+                                eraseRight = eraseLeft + shapeWidth ;
+                                clearIt(eraseTop, eraseLeft, eraseBot, eraseRight);
                             }
                             break;
                         }
@@ -257,35 +219,20 @@ namespace TestingDrawArr.DrawingStuff
                             //------------------
                             {
                                 eraseTop = Top;
-                                eraseBot = Top + (shapeHeight - 1);
+                                eraseBot = Top + shapeHeight ;
                                 eraseLeft = Left;
-                                eraseRight = Left + (LRInterval - 1);
-
-                                eraseHeight = shapeHeight;
-                                eraseWidth = Math.Abs(eraseLeft - eraseRight) + 1;
-
-                                arrEraseInts[0, 0] = eraseLeft;
-                                arrEraseInts[0, 1] = eraseTop;
-                                arrEraseInts[0, 2] = eraseHeight;
-                                arrEraseInts[0, 3] = eraseWidth;
-
+                                eraseRight = Left + LRInterval ;
+                                clearIt(eraseTop, eraseLeft, eraseBot, eraseRight);
                             }
                             //------------------
                             // Erase Wide Area
                             //------------------
                             {
-                                eraseTop = Top + (shapeHeight - 1);
-                                eraseBot = Top + (shapeHeight - 1) + UDInterval;
+                                eraseTop = Top + shapeHeight - UDInterval;
+                                eraseBot = Top + shapeHeight ;
                                 eraseLeft = Left;
-                                eraseRight = Left + (shapeWidth - 1);
-
-                                eraseHeight = Math.Abs(eraseTop - eraseBot) + 1;
-                                eraseWidth = shapeWidth;
-
-                                arrEraseInts[1, 0] = eraseLeft;
-                                arrEraseInts[1, 1] = eraseTop;
-                                arrEraseInts[1, 2] = eraseHeight;
-                                arrEraseInts[1, 3] = eraseWidth;
+                                eraseRight = Left + shapeWidth;
+                                clearIt(eraseTop, eraseLeft, eraseBot, eraseRight);
                             }
                             break;
                         }
@@ -303,17 +250,10 @@ namespace TestingDrawArr.DrawingStuff
                             //------------------
                             {
                                 eraseTop = Top;
-                                eraseBot = Top + (shapeHeight - 1);
+                                eraseBot = Top + shapeHeight;
                                 eraseLeft = Left;
-                                eraseRight = Left + (LRInterval - 1);
-
-                                eraseHeight = shapeHeight;
-                                eraseWidth = Math.Abs(eraseLeft - eraseRight) + 1;
-
-                                arrEraseInts[0, 0] = eraseLeft;
-                                arrEraseInts[0, 1] = eraseTop;
-                                arrEraseInts[0, 2] = eraseHeight;
-                                arrEraseInts[0, 3] = eraseWidth;
+                                eraseRight = Left + LRInterval;
+                                clearIt(eraseTop, eraseLeft, eraseBot, eraseRight);
                             }
 
                             //------------------
@@ -321,17 +261,10 @@ namespace TestingDrawArr.DrawingStuff
                             //------------------
                             {
                                 eraseTop = Top;
-                                eraseBot = Top + (UDInterval - 1);
+                                eraseBot = Top + UDInterval;
                                 eraseLeft = Left;
-                                eraseRight = Left + (shapeWidth - 1);
-
-                                eraseHeight = Math.Abs(eraseTop - eraseBot) + 1;
-                                eraseWidth = shapeWidth;
-
-                                arrEraseInts[1, 0] = eraseLeft;
-                                arrEraseInts[1, 1] = eraseTop;
-                                arrEraseInts[1, 2] = eraseHeight;
-                                arrEraseInts[1, 3] = eraseWidth;
+                                eraseRight = Left + shapeWidth;
+                                clearIt(eraseTop, eraseLeft, eraseBot, eraseRight);
                             }
                             break;
                         }
@@ -347,6 +280,36 @@ namespace TestingDrawArr.DrawingStuff
                         break;
                 }
 
+
+
+                /*
+
+                //================================
+                // *** NEW STUFF ***
+                //================================
+
+                if (eraseTop < 0) { eraseTop = 0; }
+                if (eraseLeft < 0) { eraseLeft = 0; }
+                for (int i = eraseTop; i < eraseBot; i++)
+                {
+                    for (int j = eraseLeft; j < eraseRight; j++)
+                    {
+                        PUBV.consoleArr_MovementLayer[i, j] = '\0';
+                        PUBV.consoleArr_NeedsUpdate[i, j] = true;
+                    }
+                }
+                */
+
+                DrawTool.AddImageToConsoleArrays_MovementLayer(newLeft, newTop, shape, true);
+
+
+                Left = newLeft;
+                Top = newTop;
+            }
+
+
+            void clearIt(int eraseTop, int eraseLeft, int eraseBot, int eraseRight)
+            {
                 //================================
                 // *** NEW STUFF ***
                 //================================
@@ -360,31 +323,6 @@ namespace TestingDrawArr.DrawingStuff
                         PUBV.consoleArr_NeedsUpdate[i, j] = true;
                     }
                 }
-                DrawTool.AddImageToConsoleArrays_MovementLayer(newLeft, newTop, shape, true);
-                //================================
-                // *** NEW STUFF ***
-                //================================
-
-
-                if (newLeft < 1) { newLeft = Left; }
-                else if (newLeft > Console.WindowWidth - shapeWidth - 1) { newLeft = Left; }
-
-                if (!diagonalMove)
-                {
-                    eraseHeight = Math.Abs(eraseTop - eraseBot) + 1;
-                    eraseWidth = Math.Abs(eraseLeft - eraseRight) + 1;
-
-                    //DrawTool.EraseArea(eraseLeft, eraseTop, eraseHeight, eraseWidth);
-                }
-                else
-                {
-                    //DrawTool.EraseArea(arrEraseInts[0, 0], arrEraseInts[0, 1], arrEraseInts[0, 2], arrEraseInts[0, 3]);
-                    //DrawTool.EraseArea(arrEraseInts[1, 0], arrEraseInts[1, 1], arrEraseInts[1, 2], arrEraseInts[1, 3]);
-                }
-
-                // DrawTool.Draw_A_Shape(newLeft, newTop, this);
-                Left = newLeft;
-                Top = newTop;
             }
         }
 
@@ -400,9 +338,6 @@ namespace TestingDrawArr.DrawingStuff
             down_right,
             Wait
         }
-
-
-
 
         public enum MovementTypes
         {

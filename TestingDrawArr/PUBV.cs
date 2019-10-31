@@ -34,22 +34,29 @@ namespace TestingDrawArr
 
         public static List<DrawingStuff.ASCII_Shape> PriorityList_Shapes = new List<DrawingStuff.ASCII_Shape>();
 
+
+        public static int ConsoleHeight;
+        public static int ConsoleWidth;
+
         public static void Initialize_ConsoleArray()
         {
-            consoleArr_NeedsUpdate = new bool[Console.LargestWindowHeight, Console.LargestWindowWidth];
+            ConsoleHeight = Console.LargestWindowHeight;
+            ConsoleWidth = Console.LargestWindowWidth;
+
+            consoleArr_NeedsUpdate = new bool[Console.LargestWindowHeight, ConsoleWidth];
 
 
-            consoleArr_MovementLayer        = new char[Console.LargestWindowHeight, Console.LargestWindowWidth];
-            consoleArr_MovementLayer_Colors = new char[Console.LargestWindowHeight, Console.LargestWindowWidth];
+            consoleArr_MovementLayer        = new char[ConsoleHeight, ConsoleWidth];
+            consoleArr_MovementLayer_Colors = new char[ConsoleHeight, ConsoleWidth];
                        
 
-            consoleArr_Static1          = new char[Console.LargestWindowHeight, Console.LargestWindowWidth];
-            consoleArr_Static2          = new char[Console.LargestWindowHeight, Console.LargestWindowWidth];
-            consoleArr_Static3          = new char[Console.LargestWindowHeight, Console.LargestWindowWidth];
+            consoleArr_Static1          = new char[ConsoleHeight, ConsoleWidth];
+            consoleArr_Static2          = new char[ConsoleHeight, ConsoleWidth];
+            consoleArr_Static3          = new char[ConsoleHeight, ConsoleWidth];
 
-            consoleArr_Static1_Colors   = new char[Console.LargestWindowHeight, Console.LargestWindowWidth];
-            consoleArr_Static2_Colors   = new char[Console.LargestWindowHeight, Console.LargestWindowWidth];
-            consoleArr_Static3_Colors   = new char[Console.LargestWindowHeight, Console.LargestWindowWidth];
+            consoleArr_Static1_Colors   = new char[ConsoleHeight, ConsoleWidth];
+            consoleArr_Static2_Colors   = new char[ConsoleHeight, ConsoleWidth];
+            consoleArr_Static3_Colors   = new char[ConsoleHeight, ConsoleWidth];
         }
 
 

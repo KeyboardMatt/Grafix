@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DrawingStuff\ASCII_Shape.cs" />
+    <Compile Include="DrawingStuff\CustomShapeMaker.cs" />
     <Compile Include="DrawingStuff\PredefinedShapes.cs" />
     <Compile Include="DrawingStuff\Movements\Diagonal_BL_TR.cs" />
     <Compile Include="DrawingStuff\Movements\Left_Right.cs" />
@@ -60,7 +61,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DrawingStuff\ShapeMover.cs" />
     <Compile Include="TestStuff\TextBoxer.cs" />
-    <Compile Include="TestStuff\TextFormatter.cs" />
     <Compile Include="TestStuff\TextSplitter.cs" />
   </ItemGroup>
   <ItemGroup>

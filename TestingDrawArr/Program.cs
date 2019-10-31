@@ -27,63 +27,76 @@ namespace TestingDrawArr
             DrawingStuff.ASCII_Shape mySword = new DrawingStuff.ASCII_Shape(DrawingStuff.DrawTool.ShapeTypes.Sword);
 
 
-            DrawingStuff.DrawTool.AddImageToConsoleArrays_MovementLayer(10, 40, myTextBox);
-            DrawingStuff.DrawTool.AddImageToConsoleArrays_StaticLayer(50, 18, mySword);
-            DrawingStuff.DrawTool.AddImageToConsoleArrays_StaticLayer(20, 15, myAxe);
-            DrawingStuff.DrawTool.AddImageToConsoleArrays_StaticLayer(7, 10, myAxe);
+            DrawingStuff.ASCII_Shape mySideBar = new DrawingStuff.ASCII_Shape(PUBV.ConsoleHeight-1, 30);
+
+            DrawingStuff.DrawTool.AddImageToConsoleArrays_MovementLayer(10, 20, myTextBox);
+            DrawingStuff.DrawTool.AddImageToConsoleArrays_StaticLayer(0, 0, mySideBar);
+
             
+
 
 
             DrawingStuff.DrawTool.Draw_ConsoleArrayLayers();
 
             Array.Clear(PUBV.consoleArr_NeedsUpdate, 0, PUBV.consoleArr_NeedsUpdate.Length);
-            Console.ReadKey();
-            ConsoleKey key;
+            ConsoleKey key = ConsoleKey.D9;
+            bool dontCheck = false;
             for (; ; )
             {
-
-               
-
-                key = Console.ReadKey().Key;
-
-                switch(key)
+                if (!dontCheck)
                 {
-                    case ConsoleKey.UpArrow:
-                        DrawingStuff.ShapeMover.Move_Custom(myTextBox, DrawingStuff.ShapeMover.MoveDirections.up);
-                        break;
+                    key = Console.ReadKey(true).Key;
 
-                    case ConsoleKey.DownArrow:
-                        DrawingStuff.ShapeMover.Move_Custom(myTextBox, DrawingStuff.ShapeMover.MoveDirections.down);
-                        break;
 
-                    case ConsoleKey.RightArrow:
-                        DrawingStuff.ShapeMover.Move_Custom(myTextBox, DrawingStuff.ShapeMover.MoveDirections.right);
-                        break;
+                    switch (key)
+                    {
+                        case ConsoleKey.W:
+                            DrawingStuff.ShapeMover.Move_Custom(myTextBox, DrawingStuff.ShapeMover.MoveDirections.up);
+                            break;
 
-                    case ConsoleKey.LeftArrow:
-                        DrawingStuff.ShapeMover.Move_Custom(myTextBox, DrawingStuff.ShapeMover.MoveDirections.left);
-                        break;
+                        case ConsoleKey.S:
+                            DrawingStuff.ShapeMover.Move_Custom(myTextBox, DrawingStuff.ShapeMover.MoveDirections.down);
+                            break;
 
-                    default:
-                        DrawingStuff.ShapeMover.Move_Custom(myTextBox, DrawingStuff.ShapeMover.MoveDirections.down);
-                        break;
+                        case ConsoleKey.D:
+                            DrawingStuff.ShapeMover.Move_Custom(myTextBox, DrawingStuff.ShapeMover.MoveDirections.right);
+                            break;
+
+                        case ConsoleKey.A:
+                            DrawingStuff.ShapeMover.Move_Custom(myTextBox, DrawingStuff.ShapeMover.MoveDirections.left);
+                            break;
+
+                        case ConsoleKey.Q:
+                            DrawingStuff.ShapeMover.Move_Custom(myTextBox, DrawingStuff.ShapeMover.MoveDirections.up_left);
+                            break;
+
+                        case ConsoleKey.E:
+                            DrawingStuff.ShapeMover.Move_Custom(myTextBox, DrawingStuff.ShapeMover.MoveDirections.up_right);
+                            break;
+
+                        case ConsoleKey.Z:
+                            DrawingStuff.ShapeMover.Move_Custom(myTextBox, DrawingStuff.ShapeMover.MoveDirections.down_left);
+                            break;
+
+                        case ConsoleKey.C:
+                            DrawingStuff.ShapeMover.Move_Custom(myTextBox, DrawingStuff.ShapeMover.MoveDirections.down_right);
+                            break;
+
+                        default:
+                            // Do nothing
+                            break;
+                    }
+                
+                }
+                else
+                {
+                    DrawingStuff.ShapeMover.StepAllShapes();
                 }
 
+
                 DrawingStuff.DrawTool.Draw_ConsoleArrayLayers();
+
             }
-
-            DrawingStuff.ShapeMover.Move_Custom(myTextBox, DrawingStuff.ShapeMover.MoveDirections.up);
-            DrawingStuff.DrawTool.Draw_ConsoleArrayLayers();
-            Console.ReadKey();
-
-            DrawingStuff.ShapeMover.Move_Custom(myTextBox, DrawingStuff.ShapeMover.MoveDirections.up);
-            DrawingStuff.DrawTool.Draw_ConsoleArrayLayers();
-            Console.ReadKey();
-
-            DrawingStuff.ShapeMover.Move_Custom(myTextBox, DrawingStuff.ShapeMover.MoveDirections.up);
-            DrawingStuff.DrawTool.Draw_ConsoleArrayLayers();
-            Console.ReadKey();
-
         }
     }    
 }

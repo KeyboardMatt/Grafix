@@ -115,35 +115,15 @@ namespace TestingDrawArr.TestStuff
 
             lReturnStrings.Add(topBorder);
 
-
-            // Write
-            //Console.CursorTop = top;
-            //Console.CursorLeft = left;
-            //CTools.Color_Write(topBorder, boxColor, true);
-
             for (int i = 0; i < lLinesOfText.Count; i++)
             {
                 trailingSpacesCount = totalWordSpaceWidth - leadingSpacesCount - lLinesOfText[i].Length;
                 trailingSpaces = string.Concat(Enumerable.Repeat(" ", trailingSpacesCount));
-                /*
-                Console.CursorLeft = left;
-
-                CTools.Color_Write(leftBorder, boxColor, false);
-                Console.Write(leadingSpaces);
-                CTools.Color_Write(lLinesOfText[i], textColor, false);
-                Console.Write(trailingSpaces);
-                CTools.Color_Write(rightBorder, boxColor, true);
-                */
                 midString = leftBorder + leadingSpaces + lLinesOfText[i] + trailingSpaces + rightBorder;
                 lReturnStrings.Add(midString);
             }
 
-            //Console.CursorLeft = left;
-            //CTools.Color_Write(botBorder, boxColor, true);
             lReturnStrings.Add(botBorder);
-
-            Console.ReadKey();
-
             return lReturnStrings;
         }
     }

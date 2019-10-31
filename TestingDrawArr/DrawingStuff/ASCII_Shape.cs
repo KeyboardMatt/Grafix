@@ -60,7 +60,16 @@ namespace TestingDrawArr.DrawingStuff
         }
 
 
+        public ASCII_Shape(int barHeight, int barWidth, List<string> listOfColors = null)
+        {
+            List<string> listOfStrings = CustomShapeMaker.MakeSideBar(barHeight, barWidth);
+            lStrings = listOfStrings;
 
+            if (listOfColors == null)
+            { lColors = lStrings; }
+            else { lColors = listOfColors; }
+
+        }
 
 
         //========================================

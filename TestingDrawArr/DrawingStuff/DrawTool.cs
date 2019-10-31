@@ -58,7 +58,9 @@ namespace TestingDrawArr.DrawingStuff
                         }
                     }
                 }
-            }            
+            }
+            Console.CursorVisible = false;
+            Console.SetCursorPosition(0, 0);
         }
 
 
@@ -170,6 +172,7 @@ namespace TestingDrawArr.DrawingStuff
                 }
                 Left = StartLeft;
             }
+            Console.SetCursorPosition(0, 0);
             Console.CursorVisible = false;
         }
 
@@ -419,6 +422,7 @@ namespace TestingDrawArr.DrawingStuff
             Hammer,
             Unarmed,
             Building_0,
+            SideBar,
             Custom
         }
     }
