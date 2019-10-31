@@ -1,0 +1,7 @@
+C:\Users\mglenn\source\repos\TestingDrawArr\bin\Debug\TestingDrawArr.exe.config
+C:\Users\mglenn\source\repos\TestingDrawArr\bin\Debug\TestingDrawArr.exe
+C:\Users\mglenn\source\repos\TestingDrawArr\bin\Debug\TestingDrawArr.pdb
+C:\Users\mglenn\source\repos\TestingDrawArr\obj\Debug\TestingDrawArr.csprojAssemblyReference.cache
+C:\Users\mglenn\source\repos\TestingDrawArr\obj\Debug\TestingDrawArr.csproj.CoreCompileInputs.cache
+C:\Users\mglenn\source\repos\TestingDrawArr\obj\Debug\TestingDrawArr.exe
+C:\Users\mglenn\source\repos\TestingDrawArr\obj\Debug\TestingDrawArr.pdb
